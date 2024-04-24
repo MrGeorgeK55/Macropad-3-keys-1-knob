@@ -57,3 +57,10 @@ for visibility reasons any 00 after any data its just an FF or empty field
 1. `$ isp55e0 --data-dump flashdata.bin`
 2. edit first 6 bytes of this binary (3 keys, plus 3 for the knob), and write it back:
 3. `$ isp55e0 --data-flash flashdata.bin`
+
+
+### Documentation
+
+  [CH552x Datasheet ](https://www.wch-ic.com/downloads/CH552DS1_PDF.html)  
+  [USB HID Codes](https://usb.org/sites/default/files/hut1_21_0.pdf#page=83)  
+  [Consumer HID Codes](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)  

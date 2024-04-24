@@ -117,7 +117,9 @@ enum KeyType
 
 // 12 are the bytes used for each key for now (macros up to 10 keys)
 // you only need to change this value if you want to use more keys
-// by now it will
+// by now it will only read the first 12 bytes of each key
+// additionaly change  uint8_t code[X]; with the maximum ammount of keys you want to use
+ 
 int index = 0;
 int __xdata incremental = 12;
 
@@ -300,7 +302,7 @@ void main(void)
         ; // wait until next detent
     }
 
-// macros arent enabled on the rotatory encoder because keys tend to act weirlly when using them
+// macros arent enabled on the rotatory encoder because keys tend to act weirdly when using them
 // you can enable them by uncommenting the code below
 
 
