@@ -189,6 +189,8 @@ void handle_key(uint8_t current, struct key *key, uint8_t *neo)
           DLY_ms(5);
         }
       }
+      if (neo)
+        *neo = NEO_MAX; // light up corresponding NeoPixel
     }
     else
     { // key was released?
@@ -207,7 +209,11 @@ void handle_key(uint8_t current, struct key *key, uint8_t *neo)
       }
     }
   }
-
+  else if (key->last)
+  { // key still being pressed?
+    if (neo)
+      *neo = NEO_MAX; // keep NeoPixel on
+  }
 }
 
 // handle knob
