@@ -130,6 +130,7 @@ __xdata struct key
   enum KeyType type;     // type of key 00 = keyboard key // 01 = consumer key // 02 = macro key
   uint8_t mod;           // modifier of the key (only used in Keyboard type)
   uint8_t ammount;       // ammount of keys in the macro (only used in Macro type)
+  uint8_t secondkey;     // second key of keyboard (only used in Keyboard type) (this to use 2 different keys on the same button)
   uint8_t code[10];      // code of the key (only used in Keyboard and Macro type)
   uint16_t codeConsumer; // code of the key (only used in Consumer type) (was getting an error when using an array)
   uint8_t last;          // last state of the key
