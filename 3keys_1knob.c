@@ -225,6 +225,7 @@ void main(void)
 {
   // Variables
   __xdata struct key keys[6]; // array of struct for keys
+  __xdata struct key *currentKnobKey;
   __idata uint8_t i;
   __idata uint8_t j; // temp variable
   uint8_t neo[6] =
