@@ -119,11 +119,9 @@ enum KeyType
 // you only need to change this value if you want to use more keys
 // by now it will only read the first 12 bytes of each key
 // additionaly change  uint8_t code[X]; with the maximum ammount of keys you want to use
- 
+
 int index = 0;
 int __xdata incremental = 12;
-
-// #define KEY_EEPROM_FIELDS 3
 
 // structur with key details
 // to make it easier to read, i changed the order of the fields
@@ -135,7 +133,7 @@ __xdata struct key
   uint8_t code[10];      // code of the key (only used in Keyboard and Macro type)
   uint16_t codeConsumer; // code of the key (only used in Consumer type) (was getting an error when using an array)
   uint8_t last;          // last state of the key
-  
+
 };
 
 // ===================================================================================
@@ -191,8 +189,6 @@ void handle_key(uint8_t current, struct key *key, uint8_t *neo)
           DLY_ms(5);
         }
       }
-      if (neo)
-        *neo = NEO_MAX; // light up corresponding NeoPixel
     }
     else
     { // key was released?
@@ -211,11 +207,33 @@ void handle_key(uint8_t current, struct key *key, uint8_t *neo)
       }
     }
   }
-  else if (key->last)
-  { // key still being pressed?
-    if (neo)
-      *neo = NEO_MAX; // keep NeoPixel on
-  }
+
+}
+
+// handle knob
+void handle_knob(struct key *key)
+{
+      if (key->type == KEYBOARD)
+      {
+        KBD_code_type(key->mod, key->code[0]); // press keyboard/keypad key
+      }
+
+      else if (key->type == CONSUMER)
+      {
+        CON_type(key->codeConsumer); // press consumer key
+      }
+
+      else if (key->type == MACRO)
+      {
+        for (int i = 0; i < key->ammount; i++)
+        {
+          KBD_code_press(0, key->code[i]);
+          DLY_ms(5);
+          KBD_code_release(0, key->code[i]);
+          DLY_ms(5);
+        }
+      }
+            DLY_ms(10);    
 }
 
 // ===================================================================================
@@ -225,7 +243,6 @@ void main(void)
 {
   // Variables
   __xdata struct key keys[6]; // array of struct for keys
-  __xdata struct key *currentKnobKey;
   __idata uint8_t i;
   __idata uint8_t j; // temp variable
   uint8_t neo[6] =
@@ -284,55 +301,20 @@ void main(void)
     handle_key(!PIN_read(PIN_KEY2), &keys[1], &neo[1]);
     handle_key(!PIN_read(PIN_KEY3), &keys[2], &neo[2]);
     handle_key(!PIN_read(PIN_ENC_SW), &keys[3], (void *)0);
+    
 
-    // Handle knob
-    currentKnobKey = 0; // clear key variable
-    if (!PIN_read(PIN_ENC_A))
-    { // encoder turned ?
-      if (PIN_read(PIN_ENC_B))
-      {
-        currentKnobKey = &keys[4]; // clockwise?
+    if(!PIN_read(PIN_ENC_A)) {                       // encoder turned ?
+      if(PIN_read(PIN_ENC_B)) {
+        handle_knob(&keys[4]);                   // clockwise?
       }
-      else
-      {
-        currentKnobKey = &keys[5]; // counter-clockwise?
+      else {
+        handle_knob(&keys[5]);                   // counter-clockwise?
       }
-
-      DLY_ms(10); // debounce
-      while (!PIN_read(PIN_ENC_A))
-        ; // wait until next detent
+      while(!PIN_read(PIN_ENC_A));                   // wait until next detent
     }
 
-// macros arent enabled on the rotatory encoder because keys tend to act weirdly when using them
-// you can enable them by uncommenting the code below
 
 
-    if (currentKnobKey)
-    {
-      if (currentKnobKey->type == KEYBOARD)
-      {
-        KBD_code_type(currentKnobKey->mod,
-                      currentKnobKey->code); // press and release corresponding key ...
-      }
-      else if (key->type == CONSUMER)
-      {
-        CON_type(currentKnobKey->code); // press and release corresponding key ...
-      }
-      else if (key->type == MACRO)
-      {
-        DLY_ms(50);
-        // uncomment this to enable macros on the rotatory encoder and comment the line above
-        /*  
-        for (int i = 0; i < currentKnobKey->ammount; i++)
-        {
-          KBD_code_press(0, currentKnobKey->code[i]);
-          DLY_ms(5);
-          KBD_code_release(0, currentKnobKey->code[i]);
-          DLY_ms(5);
-        }
-        */
-      }
-    }
 
     // Update NeoPixels
     NEO_update(neo);
