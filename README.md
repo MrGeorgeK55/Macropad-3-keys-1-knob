@@ -37,12 +37,11 @@ C1 to C9 represents the extra code fields only used for macro keys
 ### For macro keys
 A0 represents the ammount of keys in the macro  
   
-for visibility reasons any 00 after any data its just an FF or empty field   
+*for visibility reasons any 00 after any data its just an FF or empty field   
 00 is different than FF   
 
 
-
-# Compilatioon
+# Compilation
 
 ### compile:
 `$ make bin`
@@ -64,3 +63,20 @@ for visibility reasons any 00 after any data its just an FF or empty field
   [CH552x Datasheet ](https://www.wch-ic.com/downloads/CH552DS1_PDF.html)  
   [USB HID Codes](https://usb.org/sites/default/files/hut1_21_0.pdf#page=83)  
   [Consumer HID Codes](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)  
+
+
+# Notes:
+### Functions not supported yet by only reading the EEPROM  
+- Strings of text (you maybe need a bigger EEPROM)
+- Mouse movements/clicks (not sure, not tested)
+- Modifiers on macro secuences
+- Modifiers on consumer keys
+
+i still havent found the way to make work the RIGTH_GUI and LEFT_GUI keys  
+(aka windows keys or Apple equivalent)
+
+
+### Yet to implement
+
+- multiple keys on a single key each time you pressed (this to handle Play / Pause buttons (yes, those are different buttons))
+- 
