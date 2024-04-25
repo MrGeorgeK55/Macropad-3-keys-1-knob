@@ -133,7 +133,6 @@ __xdata struct key
   uint8_t code[10];      // code of the key (only used in Keyboard and Macro type)
   uint16_t codeConsumer; // code of the key (only used in Consumer type) (was getting an error when using an array)
   uint8_t last;          // last state of the key
-
 };
 
 // ===================================================================================
@@ -219,27 +218,27 @@ void handle_key(uint8_t current, struct key *key, uint8_t *neo)
 // handle knob
 void handle_knob(struct key *key)
 {
-      if (key->type == KEYBOARD)
-      {
-        KBD_code_type(key->mod, key->code[0]); // press keyboard/keypad key
-      }
+  if (key->type == KEYBOARD)
+  {
+    KBD_code_type(key->mod, key->code[0]); // press keyboard/keypad key
+  }
 
-      else if (key->type == CONSUMER)
-      {
-        CON_type(key->codeConsumer); // press consumer key
-      }
+  else if (key->type == CONSUMER)
+  {
+    CON_type(key->codeConsumer); // press consumer key
+  }
 
-      else if (key->type == MACRO)
-      {
-        for (int i = 0; i < key->ammount; i++)
-        {
-          KBD_code_press(0, key->code[i]);
-          DLY_ms(5);
-          KBD_code_release(0, key->code[i]);
-          DLY_ms(5);
-        }
-      }
-            DLY_ms(10);    
+  else if (key->type == MACRO)
+  {
+    for (int i = 0; i < key->ammount; i++)
+    {
+      KBD_code_press(0, key->code[i]);
+      DLY_ms(5);
+      KBD_code_release(0, key->code[i]);
+      DLY_ms(5);
+    }
+  }
+  DLY_ms(10);
 }
 
 // ===================================================================================
@@ -307,20 +306,20 @@ void main(void)
     handle_key(!PIN_read(PIN_KEY2), &keys[1], &neo[1]);
     handle_key(!PIN_read(PIN_KEY3), &keys[2], &neo[2]);
     handle_key(!PIN_read(PIN_ENC_SW), &keys[3], (void *)0);
-    
 
-    if(!PIN_read(PIN_ENC_A)) {                       // encoder turned ?
-      if(PIN_read(PIN_ENC_B)) {
-        handle_knob(&keys[4]);                   // clockwise?
+    if (!PIN_read(PIN_ENC_A))
+    { // encoder turned ?
+      if (PIN_read(PIN_ENC_B))
+      {
+        handle_knob(&keys[4]); // clockwise?
       }
-      else {
-        handle_knob(&keys[5]);                   // counter-clockwise?
+      else
+      {
+        handle_knob(&keys[5]); // counter-clockwise?
       }
-      while(!PIN_read(PIN_ENC_A));                   // wait until next detent
+      while (!PIN_read(PIN_ENC_A))
+        ; // wait until next detent
     }
-
-
-
 
     // Update NeoPixels
     NEO_update(neo);
