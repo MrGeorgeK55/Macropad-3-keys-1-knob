@@ -1,4 +1,7 @@
-# 3keys_1knob
+
+![20240426_140314](https://github.com/MrGeorgeK55/Macropad-3-keys-1-knob/assets/103085400/3a6453fc-e2b9-457d-84e9-b193e2463602)
+
+# Macropad with 3 keys and 1 knob
 Custom firmware for a 3-key + rotary encoder macropad (Based on IC CH552g) (https://hackaday.io/project/189914)
 
 # Example data structure for the EEPROM
@@ -41,7 +44,7 @@ A0 represents the ammount of keys in the macro
 *for visibility reasons any 00 after any data its just an FF or empty field   
 00 is different than FF   
 
-## Example data
+## Visual Example data
 
 ### Keyboard type
 
@@ -107,39 +110,39 @@ A0 represents the ammount of keys in the macro
 
 ### Consumer Keyboard Keycodes
   
-| Function | ID |  
+|ID	|Function|
 | --- | --- |
-| SYS_POWER | 30 |
-| SYS_RESET | 31 |
-| SYS_SLEEP | 32 |
-| VOL_MUTE | E2 |
-| VOL_UP | E9 |
-| VOL_DOWN | EA |
-| CON_MEDIA_PLAY | B0 |
-| CON_MEDIA_PAUSE | B1 |
-| CON_MEDIA_RECORD | B2 |
-| MEDIA_FORWARD | B3 |
-| MEDIA_REWIND | B4 |
-| MEDIA_NEXT | B5 |
-| MEDIA_PREV | B6 |
-| MEDIA_STOP | B7 |
-| MEDIA_EJECT | B8 |
-| MEDIA_RANDOM | B9 |
-| MENU | 40 |
-| MENU_PICK | 41 |
-| MENU_UP | 42 |
-| MENU_DOWN | 43 |
-| MENU_LEFT | 44 |
-| MENU_RIGHT | 45 |
-| MENU_ESCAPE | 46 |
-| MENU_INCR | 47 |
-| MENU_DECR | 48 |
+|30	|SYS_POWER |
+|31|	SYS_RESET|
+|32| SYS_SLEEP|
+|E2|	VOL_MUTE|
+|E9|	VOL_UP|
+|EA|	VOL_DOWN|
+|B0|	CON_MEDIA_PLAY|
+|B1|	CON_MEDIA_PAUSE|
+|B2| CON_MEDIA_RECORD|
+|B3|	MEDIA_FORWARD|
+|B4|	MEDIA_REWIND|
+|B5|	MEDIA_NEXT|
+|B6|	MEDIA_PREV|
+|B7|	MEDIA_STOP|
+|B8|	MEDIA_EJECT|
+|B9|	MEDIA_RANDOM|
+|40|	MENU|
+|41|	MENU_PICK|
+|42|	MENU_UP|
+|43|	MENU_DOWN|
+|44|	MENU_LEFT|
+|45|	MENU_RIGHT|
+|46|	MENU_ESCAPE|
+|47|	MENU_INCR|
+|48|	MENU_DECR|
 
 
 
 # Notes:
 ### Functions not supported yet by only reading the EEPROM  
-- Strings of text (you maybe need a bigger EEPROM) (maybe a huffman algorithm)
+- Strings of text (you may need a bigger EEPROM) (maybe a huffman algorithm)
 - Mouse movements/clicks (not sure, not tested)
 - Modifiers on macro secuences
 - Modifiers on consumer keys
