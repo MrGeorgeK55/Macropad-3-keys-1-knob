@@ -35,6 +35,8 @@ C1 represents the code field of the second consumer key
 
 ### For macro keys
 A0 represents the ammount of keys in the macro  
+**This number must be in Hex value, not decimal**
+
   
 *for visibility reasons any 00 after any data its just an FF or empty field   
 00 is different than FF   
