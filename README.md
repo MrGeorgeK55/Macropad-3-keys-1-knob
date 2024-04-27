@@ -137,7 +137,7 @@ A0 represents the ammount of keys in the macro
 
 # Notes:
 ### Functions not supported yet by only reading the EEPROM  
-- Strings of text (you maybe need a bigger EEPROM)
+- Strings of text (you maybe need a bigger EEPROM) (maybe a huffman algorithm)
 - Mouse movements/clicks (not sure, not tested)
 - Modifiers on macro secuences
 - Modifiers on consumer keys

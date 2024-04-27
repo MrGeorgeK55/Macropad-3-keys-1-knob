@@ -384,4 +384,3 @@ void main(void)
     WDT_reset(); // reset watchdog
   }
 }
-
