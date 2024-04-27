@@ -33,50 +33,6 @@ C1 represents the code field of the second consumer key
 The keyboard and consumer keys have 2 states, this because in consumer keys Play/Pause are two different keys and for Keyboard becomes useful to have Ctrl+c and Ctrl+v in the same key  
 
 
-### Modifiers
-
- | ID | Function |  
-| --- | --- |
- | 00 | None  |  
- | 01 | Ctrl  |  
- | 02 | Shift | 
- | 03 | Ctrl + Shift |   
- | 04 | Alt |   
- | 05 | Ctrl + Alt | 
- | 06 | Shift + Alt | 
- | 07 | Ctrl + Shift + Alt | 
-
-### Consumer Keyboard Keycodes
-  
-| ID | Function |  
-| --- | --- |
-| SYS_POWER | 30 |
-| SYS_RESET | 31 |
-| SYS_SLEEP | 32 |
-| VOL_MUTE | E2 |
-| VOL_UP | E9 |
-| VOL_DOWN | EA |
-| CON_MEDIA_PLAY | B0 |
-| CON_MEDIA_PAUSE | B1 |
-| CON_MEDIA_RECORD | B2 |
-| MEDIA_FORWARD | B3 |
-| MEDIA_REWIND | B4 |
-| MEDIA_NEXT | B5 |
-| MEDIA_PREV | B6 |
-| MEDIA_STOP | B7 |
-| MEDIA_EJECT | B8 |
-| MEDIA_RANDOM | B9 |
-| MENU | 40 |
-| MENU_PICK | 41 |
-| MENU_UP | 42 |
-| MENU_DOWN | 43 |
-| MENU_LEFT | 44 |
-| MENU_RIGHT | 45 |
-| MENU_ESCAPE | 46 |
-| MENU_INCR | 47 |
-| MENU_DECR | 48 |
-  
-
 ### For macro keys
 A0 represents the ammount of keys in the macro  
   
@@ -92,12 +48,12 @@ A0 represents the ammount of keys in the macro
 | 00 00 04 00 04 .. | Keyboard | None | a | None | a | a | a |
 | 00 02 04 02 04 .. | Keyboard | Shift | a | Shift | a | A | A |
 | 00 01 06 01 19 .. | Keyboard | Ctrl | c | Ctrl | v | Ctrl+C | Ctrl+V |
-| 00 05 4C 03 29 .. | Keyboard | Ctrl+Alt | DEL | Ctrl+Shift | ESC |
+| 00 05 4C 03 29 .. | Keyboard | Ctrl+Alt | DEL | Ctrl+Shift | ESC | Ctrl+Alt+DEL | Ctrl+Shift+ESC |
 
 
 ### Consumer Type  
 
-| Raw bytes         | Type | Key | Key2 |
+| Raw bytes | Type | Key | Key2 |
 | -------- | ------ |  --- |  --- | 
 | 01 B6 B6 .. | Consumer | Previous | Previous | 
 | 01 B0 B1 .. | Consumer | Play | Pause |
@@ -124,7 +80,7 @@ A0 represents the ammount of keys in the macro
 
 ### configure keys:
 1. `$ isp55e0 --data-dump flashdata.bin`
-2. edit first 6 bytes of this binary (3 keys, plus 3 for the knob), and write it back:
+2. edit this binary (3 keys, plus 3 for the knob), and write it back:
 3. `$ isp55e0 --data-flash flashdata.bin`
 
 
@@ -134,6 +90,48 @@ A0 represents the ammount of keys in the macro
   [USB HID Codes](https://usb.org/sites/default/files/hut1_21_0.pdf#page=83)   
   [isp55e0](https://github.com/frank-zago/isp55e0)  
 
+### Modifiers
+
+ | ID | Function |  
+| --- | --- |
+ | 00 | None  |  
+ | 01 | Ctrl  |  
+ | 02 | Shift | 
+ | 03 | Ctrl + Shift |   
+ | 04 | Alt |   
+ | 05 | Ctrl + Alt | 
+ | 06 | Shift + Alt | 
+ | 07 | Ctrl + Shift + Alt | 
+
+### Consumer Keyboard Keycodes
+  
+| Function | ID |  
+| --- | --- |
+| SYS_POWER | 30 |
+| SYS_RESET | 31 |
+| SYS_SLEEP | 32 |
+| VOL_MUTE | E2 |
+| VOL_UP | E9 |
+| VOL_DOWN | EA |
+| CON_MEDIA_PLAY | B0 |
+| CON_MEDIA_PAUSE | B1 |
+| CON_MEDIA_RECORD | B2 |
+| MEDIA_FORWARD | B3 |
+| MEDIA_REWIND | B4 |
+| MEDIA_NEXT | B5 |
+| MEDIA_PREV | B6 |
+| MEDIA_STOP | B7 |
+| MEDIA_EJECT | B8 |
+| MEDIA_RANDOM | B9 |
+| MENU | 40 |
+| MENU_PICK | 41 |
+| MENU_UP | 42 |
+| MENU_DOWN | 43 |
+| MENU_LEFT | 44 |
+| MENU_RIGHT | 45 |
+| MENU_ESCAPE | 46 |
+| MENU_INCR | 47 |
+| MENU_DECR | 48 |
 
 
 
