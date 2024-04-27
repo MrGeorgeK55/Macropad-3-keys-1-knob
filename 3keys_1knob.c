@@ -256,10 +256,12 @@ void handle_knob(struct key *key)
     if (key->toggle == 0)
     {
       KBD_code_type(key->mod[0], key->code[0]); // press keyboard/keypad key
+      key->toggle = 1;
     }
     else
     {
       KBD_code_type(key->mod[1], key->code[1]); // press keyboard/keypad key
+      key->toggle = 0;
     }
   }
 
@@ -267,11 +269,13 @@ void handle_knob(struct key *key)
   {
     if (key->toggle == 0)
     {
-      CON_press(key->codeConsumer[0]); // press consumer key
+      CON_type(key->codeConsumer[0]); // press consumer key
+      key->toggle = 1;
     }
     else
     {
       CON_type(key->codeConsumer[1]); // press consumer key
+      key->toggle = 0;
     }
   }
 
