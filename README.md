@@ -48,33 +48,33 @@ The keyboard and consumer keys have 2 states, this because in consumer keys Play
 
 ### Consumer Keyboard Keycodes
   
- | ID | Function |  
+| ID | Function |  
 | --- | --- |
-    | SYS_POWER | 30 |
-    | SYS_RESET | 31 |
-    | SYS_SLEEP | 32 |
-    | VOL_MUTE | E2 |
-    | VOL_UP | E9 |
-    | VOL_DOWN | EA |
-    | CON_MEDIA_PLAY | B0 |
-    | CON_MEDIA_PAUSE | B1 |
-    | CON_MEDIA_RECORD | B2 |
-    | MEDIA_FORWARD | B3 |
-    | MEDIA_REWIND | B4 |
-    | MEDIA_NEXT | B5 |
-    | MEDIA_PREV | B6 |
-    | MEDIA_STOP | B7 |
-    | MEDIA_EJECT | B8 |
-    | MEDIA_RANDOM | B9 |
-    | MENU | 40 |
-    | MENU_PICK | 41 |
-    | MENU_UP | 42 |
-    | MENU_DOWN | 43 |
-    | MENU_LEFT | 44 |
-    | MENU_RIGHT | 45 |
-    | MENU_ESCAPE | 46 |
-    | MENU_INCR | 47 |
-    | MENU_DECR | 48 |
+| SYS_POWER | 30 |
+| SYS_RESET | 31 |
+| SYS_SLEEP | 32 |
+| VOL_MUTE | E2 |
+| VOL_UP | E9 |
+| VOL_DOWN | EA |
+| CON_MEDIA_PLAY | B0 |
+| CON_MEDIA_PAUSE | B1 |
+| CON_MEDIA_RECORD | B2 |
+| MEDIA_FORWARD | B3 |
+| MEDIA_REWIND | B4 |
+| MEDIA_NEXT | B5 |
+| MEDIA_PREV | B6 |
+| MEDIA_STOP | B7 |
+| MEDIA_EJECT | B8 |
+| MEDIA_RANDOM | B9 |
+| MENU | 40 |
+| MENU_PICK | 41 |
+| MENU_UP | 42 |
+| MENU_DOWN | 43 |
+| MENU_LEFT | 44 |
+| MENU_RIGHT | 45 |
+| MENU_ESCAPE | 46 |
+| MENU_INCR | 47 |
+| MENU_DECR | 48 |
   
 
 ### For macro keys
@@ -89,7 +89,7 @@ A0 represents the ammount of keys in the macro
 
 | Raw bytes         | Type     | Mod | Key | Mod2 | Key2 | Result | Result2 |
 
-| ----------- | --- | ----     | ---- | --- | --- | --- | --- | --- | 
+| ----------- | --- | ----     | ---- | --- | --- | --- | --- |  
 | 00 00 04 00 04 .. | Keyboard | None | a | None | a | a | a |
 | 00 02 04 02 04 .. | Keyboard | Shift | a | Shift | a | A | A |
 | 00 01 06 01 19 .. | Keyboard | Ctrl | c | Ctrl | v | Ctrl+C | Ctrl+V |
