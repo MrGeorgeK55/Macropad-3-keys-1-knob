@@ -1,0 +1,23 @@
+Consumer
+
+0xAD	Volume Mute key
+0xAE	Volume Down key
+0xAF	Volume Up key
+0xB0	Next Track key
+0xB1	Previous Track key
+0xB2	Stop Media key
+0xB3	Play/Pause Media key
+
+Keyboard
+
+04 Keyboard a and A
+05 Keyboard b and B 
+06 Keyboard c and C
+07 Keyboard d and D 
+08 Keyboard e and E 
+09 Keyboard f and F 
+0A Keyboard g and G 
+0B Keyboard h and H 
+0C Keyboard i and I
+0D Keyboard j and J
+

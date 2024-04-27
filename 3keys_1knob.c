@@ -39,26 +39,26 @@
 
 // Example of the eeprom data structure
 
-// Address:   0  1  2  3  4  5  6  7  8  9 10 11
 // Address:  00 01 02 03 04 05 06 07 08 09 0A 0B  (hex)
 //----------------------------------------------
-// x0000000: T0 M0 C0 00 00 00 00 00 00 00 00 00  // key 1 // used only on keyboard keys
-// x000000c: T1 C0 00 00 00 00 00 00 00 00 00 00  // key 2 // used only on consumer keys
+// x0000000: T0 M0 C0 M1 C1 00 00 00 00 00 00 00  // key 1 // used only on keyboard keys
+// x000000c: T1 C0 C1 00 00 00 00 00 00 00 00 00  // key 2 // used only on consumer keys
 // x0000018: T2 A0 C0 C1 C2 C3 C4 C5 C6 C7 C8 C9  // key 3 // used only on macro keys
 
 // T0 represents the type field of the first key
 // 00 = keyboard key // 01 = consumer key // 02 = macro key
 
 // For keyboard and consumer keys
-// M0 represents the mod field of the first key
+// M0 represents the mod field of the first keyboad key
+// M1 represents the mod field of the second keyboard key
 
-// C0 represents the code field of the first key
+// C0 represents the code field of the first consumer key
+// C1 represents the code field of the second consumer key
 // (rarelly you need a mod for consumer keys so it is not used)
-
-// C1 to C9 represents the extra code fields only used for macro keys
 
 // For macro keys
 // A0 represents the ammount of keys in the macro
+// C1 to C9 represents the extra code fields only used for macro keys
 
 // for visibility reasons any 00 after any data its just an FF or empty field
 // 00 is different than FF
@@ -133,7 +133,7 @@ __xdata struct key
   uint8_t code[10];         // code of the key (only used in Keyboard and Macro type)
   uint16_t codeConsumer[2]; // code of the key (only used in Consumer type) (was getting an error when using an array)
   uint8_t last;             // last state of the key
-  uint8_t toggle;       // toggle for the key
+  uint8_t toggle;           // toggle for the key
 };
 
 // ===================================================================================
@@ -384,3 +384,4 @@ void main(void)
     WDT_reset(); // reset watchdog
   }
 }
+
