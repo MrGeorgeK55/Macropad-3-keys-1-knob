@@ -29,8 +29,8 @@ C0 represents the code field of the first consumer key
 C1 represents the code field of the second consumer key  
 (rarelly you need a mod for consumer keys so it is not used)  
   
-### Note 
-The keyboard and consumer keys have 2 states, this because in consumer keys Play/Pause are two different keys and for Keyboard becomes useful to have Ctrl+c and Ctrl+v in the same key  
+> [!NOTE] 
+> The keyboard and consumer keys have 2 states, this because in consumer keys Play/Pause are two different keys and for Keyboard becomes useful to have Ctrl+c and Ctrl+v in the same key  
 
 
 ### For macro keys
