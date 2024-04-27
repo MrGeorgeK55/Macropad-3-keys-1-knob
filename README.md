@@ -1,3 +1,6 @@
+
+![20240426_140314](https://github.com/MrGeorgeK55/Macropad-3-keys-1-knob/assets/103085400/3a6453fc-e2b9-457d-84e9-b193e2463602)
+
 # 3keys_1knob
 Custom firmware for a 3-key + rotary encoder macropad (Based on IC CH552g) (https://hackaday.io/project/189914)
 
