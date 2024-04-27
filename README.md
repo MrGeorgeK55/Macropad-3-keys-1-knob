@@ -33,8 +33,10 @@ C1 represents the code field of the second consumer key
 The keyboard and consumer keys have 2 states, this because in consumer keys Play/Pause are two different keys and for Keyboard becomes useful to have Ctrl+c and Ctrl+v in the same key  
 
 
-### Modifiers  
+### Modifiers
 
+ | ID | Function |  
+| --- | --- |
  | 00 | None  |  
  | 01 | Ctrl  |  
  | 02 | Shift | 
@@ -46,6 +48,8 @@ The keyboard and consumer keys have 2 states, this because in consumer keys Play
 
 ### Consumer Keyboard Keycodes
   
+ | ID | Function |  
+| --- | --- |
     | SYS_POWER | 30 |
     | SYS_RESET | 31 |
     | SYS_SLEEP | 32 |
@@ -84,6 +88,8 @@ A0 represents the ammount of keys in the macro
 ### Keyboard type
 
 | Raw bytes         | Type     | Mod | Key | Mod2 | Key2 | Result | Result2 |
+
+| ----------- | --- | ----     | ---- | --- | --- | --- | --- | --- | 
 | 00 00 04 00 04 .. | Keyboard | None | a | None | a | a | a |
 | 00 02 04 02 04 .. | Keyboard | Shift | a | Shift | a | A | A |
 | 00 01 06 01 19 .. | Keyboard | Ctrl | c | Ctrl | v | Ctrl+C | Ctrl+V |
@@ -93,6 +99,7 @@ A0 represents the ammount of keys in the macro
 ### Consumer Type  
 
 | Raw bytes         | Type | Key | Key2 |
+| -------- | ------ |  --- |  --- | 
 | 01 B6 B6 .. | Consumer | Previous | Previous | 
 | 01 B0 B1 .. | Consumer | Play | Pause |
 | 01 E9 E9 .. | Consumer | Vol + | Vol + |
@@ -101,6 +108,7 @@ A0 represents the ammount of keys in the macro
 ### Macro Type
 
 | Raw bytes | Type | # of Keys | Code | Code1 | Code2 | Result |   
+| -------- | ------ |  --- |  --- |  --- | --- | --- |
 | 02 03 06 04 17 .. | Macro | 3 | c | a | t | cat |
 | 02 03 07 12 0A .. | Macro | 3 | d | o | g | dog |
 
