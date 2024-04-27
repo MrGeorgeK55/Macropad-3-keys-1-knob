@@ -127,13 +127,13 @@ int __xdata incremental = 12;
 // to make it easier to read, i changed the order of the fields
 __xdata struct key
 {
-  enum KeyType type;     // type of key 00 = keyboard key // 01 = consumer key // 02 = macro key
-  uint8_t mod;           // modifier of the key (only used in Keyboard type)
-  uint8_t ammount;       // ammount of keys in the macro (only used in Macro type)
-  uint8_t secondkey;     // second key of keyboard (only used in Keyboard type) (this to use 2 different keys on the same button)
-  uint8_t code[10];      // code of the key (only used in Keyboard and Macro type)
-  uint16_t codeConsumer; // code of the key (only used in Consumer type) (was getting an error when using an array)
-  uint8_t last;          // last state of the key
+  enum KeyType type;        // type of key 00 = keyboard key // 01 = consumer key // 02 = macro key
+  uint8_t mod[2];           // modifier of the key (only used in Keyboard type)
+  uint8_t ammount;          // ammount of keys in the macro (only used in Macro type)
+  uint8_t code[10];         // code of the key (only used in Keyboard and Macro type)
+  uint16_t codeConsumer[2]; // code of the key (only used in Consumer type) (was getting an error when using an array)
+  uint8_t last;             // last state of the key
+  int toggle = 0;
 };
 
 // ===================================================================================
@@ -144,14 +144,14 @@ __xdata struct key
 void NEO_update(uint8_t *neo)
 {
   EA = 0;                       // disable interrupts
-  NEO_writeColor(neo[0], 0, 0); // NeoPixel 1 lights up red
+  NEO_writeColor(0, neo[0], 0); // NeoPixel 1 lights up red
   NEO_writeColor(0, neo[1], 0); // NeoPixel 2 lights up green
-  NEO_writeColor(0, 0, neo[2]); // NeoPixel 3 lights up blue
+  NEO_writeColor(0, neo[2], 0); // NeoPixel 3 lights up blue
   EA = 1;                       // enable interrupts
 }
 
 // Read EEPROM (stolen from https://github.com/DeqingSun/ch55xduino/blob/ch55xduino/ch55xduino/ch55x/cores/ch55xduino/eeprom.c)
-// not changed, no idea how it works
+// not changed, no idea how it works or what it does
 uint8_t eeprom_read_byte(uint8_t addr)
 {
   ROM_ADDR_H = DATA_FLASH_ADDR >> 8;
@@ -170,17 +170,30 @@ void handle_key(uint8_t current, struct key *key, uint8_t *neo)
     { // key was pressed?
       if (key->type == KEYBOARD)
       {
-        KBD_code_press(key->mod, key->code[0]); // press keyboard/keypad key
+        if (key->toggle == 0)
+        {
+          KBD_code_press(key->mod[0], key->code[0]); // press keyboard/keypad key
+        }
+        else
+        {
+          KBD_code_press(key->mod[1], key->code[1]); // release
+        }
       }
 
       else if (key->type == CONSUMER)
       {
-        CON_press(key->codeConsumer); // press consumer key
+        if (key->toggle == 0)
+        {
+          CON_press(key->codeConsumer[0]); // press consumer key
+        }
+        else
+        {
+          CON_press(key->codeConsumer[1]); // release
+        }
       }
 
       else if (key->type == MACRO)
       {
-
         for (int i = 0; i < key->ammount; i++)
         {
           KBD_code_press(0, key->code[i]);
@@ -189,6 +202,7 @@ void handle_key(uint8_t current, struct key *key, uint8_t *neo)
           DLY_ms(5);
         }
       }
+
       if (neo)
         *neo = NEO_MAX; // light up corresponding NeoPixel
     }
@@ -196,11 +210,29 @@ void handle_key(uint8_t current, struct key *key, uint8_t *neo)
     { // key was released?
       if (key->type == KEYBOARD)
       {
-        KBD_code_release(key->mod, key->code[0]); // release
+        if (key->toggle == 0)
+        {
+          KBD_code_release(key->mod[0], key->code[0]); // release
+          key->toggle = 1;
+        }
+        else
+        {
+          KBD_code_release(key->mod[1], key->code[1]); // press keyboard/keypad key
+          key->toggle = 0;
+        }
       }
       else if (key->type == CONSUMER)
       {
-        CON_release(key->codeConsumer); // release
+        if (key->toggle == 0)
+        {
+          CON_release(key->codeConsumer[0]); // release
+          key->toggle = 1;
+        }
+        else
+        {
+          CON_release(key->codeConsumer[1]); // release
+          key->toggle = 0;
+        }
       }
       // no need to release macro keys but enter cooldown in case it is a macro key
       if (key->type == MACRO)
@@ -221,12 +253,26 @@ void handle_knob(struct key *key)
 {
   if (key->type == KEYBOARD)
   {
-    KBD_code_type(key->mod, key->code[0]); // press keyboard/keypad key
+    if (key->toggle == 0)
+    {
+      KBD_code_type(key->mod[0], key->code[0]); // press keyboard/keypad key
+    }
+    else
+    {
+      KBD_code_type(key->mod[1], key->code[1]); // press keyboard/keypad key
+    }
   }
 
   else if (key->type == CONSUMER)
   {
-    CON_type(key->codeConsumer); // press consumer key
+    if (key->toggle == 0)
+    {
+      CON_press(key->codeConsumer[0]); // press consumer key
+    }
+    else
+    {
+      CON_type(key->codeConsumer[1]); // press consumer key
+    }
   }
 
   else if (key->type == MACRO)
@@ -277,14 +323,17 @@ void main(void)
     if (eeprom_read_byte(index) == 0)
     {
       keys[i].type = KEYBOARD;
-      keys[i].mod = eeprom_read_byte(index + 1);
+      keys[i].mod[0] = eeprom_read_byte(index + 1);
       keys[i].code[0] = eeprom_read_byte(index + 2);
+      keys[i].mod[1] = eeprom_read_byte(index + 3);
+      keys[i].code[1] = eeprom_read_byte(index + 4);
       keys[i].last = 0;
     }
     else if (eeprom_read_byte(index) == 1)
     {
       keys[i].type = CONSUMER;
-      keys[i].codeConsumer = eeprom_read_byte(index + 1);
+      keys[i].codeConsumer[0] = eeprom_read_byte(index + 1);
+      keys[i].codeConsumer[1] = eeprom_read_byte(index + 2);
       keys[i].last = 0;
     }
     else if (eeprom_read_byte(index) == 2)
