@@ -88,7 +88,6 @@ A0 represents the ammount of keys in the macro
 ### Keyboard type
 
 | Raw bytes         | Type     | Mod | Key | Mod2 | Key2 | Result | Result2 |
-
 | ----------- | --- | ----     | ---- | --- | --- | --- | --- |  
 | 00 00 04 00 04 .. | Keyboard | None | a | None | a | a | a |
 | 00 02 04 02 04 .. | Keyboard | Shift | a | Shift | a | A | A |
