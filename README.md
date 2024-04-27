@@ -95,7 +95,7 @@ A0 represents the ammount of keys in the macro
 ### Modifiers
 
  | ID | Function |  
-| --- | --- |
+ | --- | --- |
  | 00 | None  |  
  | 01 | Ctrl  |  
  | 02 | Shift | 
