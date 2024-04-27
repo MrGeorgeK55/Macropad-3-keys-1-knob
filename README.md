@@ -44,7 +44,7 @@ A0 represents the ammount of keys in the macro
 *for visibility reasons any 00 after any data its just an FF or empty field   
 00 is different than FF   
 
-## Example data
+## Visual Example data
 
 ### Keyboard type
 
@@ -142,7 +142,7 @@ A0 represents the ammount of keys in the macro
 
 # Notes:
 ### Functions not supported yet by only reading the EEPROM  
-- Strings of text (you maybe need a bigger EEPROM) (maybe a huffman algorithm)
+- Strings of text (you may need a bigger EEPROM) (maybe a huffman algorithm)
 - Mouse movements/clicks (not sure, not tested)
 - Modifiers on macro secuences
 - Modifiers on consumer keys
