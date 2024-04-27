@@ -133,7 +133,7 @@ __xdata struct key
   uint8_t code[10];         // code of the key (only used in Keyboard and Macro type)
   uint16_t codeConsumer[2]; // code of the key (only used in Consumer type) (was getting an error when using an array)
   uint8_t last;             // last state of the key
-  int toggle = 0;
+  uint8_t toggle;       // toggle for the key
 };
 
 // ===================================================================================
@@ -328,6 +328,7 @@ void main(void)
       keys[i].mod[1] = eeprom_read_byte(index + 3);
       keys[i].code[1] = eeprom_read_byte(index + 4);
       keys[i].last = 0;
+      keys[i].toggle = 0;
     }
     else if (eeprom_read_byte(index) == 1)
     {
@@ -335,6 +336,7 @@ void main(void)
       keys[i].codeConsumer[0] = eeprom_read_byte(index + 1);
       keys[i].codeConsumer[1] = eeprom_read_byte(index + 2);
       keys[i].last = 0;
+      keys[i].toggle = 0;
     }
     else if (eeprom_read_byte(index) == 2)
     {
