@@ -2,7 +2,8 @@
 ![20240426_140314](https://github.com/MrGeorgeK55/Macropad-3-keys-1-knob/assets/103085400/3a6453fc-e2b9-457d-84e9-b193e2463602)
 
 # Macropad with 3 keys and 1 knob
-Custom firmware for a 3-key + rotary encoder macropad (Based on IC CH552g) (https://hackaday.io/project/189914)
+Custom firmware for a 3-key + rotary encoder macropad (Based on IC CH552g) (https://hackaday.io/project/189914)  
+Forked from [biemster/3keys_1knob](https://github.com/biemster/3keys_1knob/), which is based on [wagiminator/CH552-Macropad-mini](https://github.com/wagiminator/CH552-Macropad-mini/).
 
 # Example data structure for the EEPROM
 
